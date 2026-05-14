@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TDK Electronics — 电子元器件商城</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/lucide-static@1.8.0/font/lucide.css">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+    :root{
+      --blue:#00529B;--blue-l:#006DB8;--blue-d:#003D73;
+      --magenta:#C01E6E;--green:#00A86B;
+      --grad:linear-gradient(135deg,var(--blue),var(--magenta) 55%,var(--green));
+      --white:#FFF;--bg:#F5F6F8;--card:#FFF;
+      --t1:#0B1623;--t2:#4A5568;--t3:#8899AA;--t4:#BCC5D0;
+      --bd:#E2E8F0;--bd2:#CBD5E0;
+      --su:#00A86B;--wa:#E5A73B;--er:#E53E3E;
+      --ff:"Inter","Noto Sans SC",-apple-system,sans-serif;
+      --fm:"JetBrains Mono","SF Mono",monospace;
+      --sh:0 1px 3px rgba(0,0,0,.08);--sh-lg:0 8px 30px rgba(0,0,0,.12);
+      --r:8px;--r-lg:12px;
+      --max:1280px;
+    }
+
+    html{scroll-behavior:smooth}
+    body{font-family:var(--ff);background:var(--bg);color:var(--t1);-webkit-font-smoothing:antialiased;line-height:1.5}
+
+    /* ── Top bar ── */
+    .topbar{background:var(--blue-d);color:rgba(255,255,255,.85);font-size:12px;padding:6px 0;text-align:center}
+    .topbar a{color:#FFF;text-decoration:none;font-weight:500}
+
+    /* ── Header ── */
+    .header{background:var(--white);border-bottom:1px solid var(--bd);position:sticky;top:0;z-index:100}
+    .header-inner{max-width:var(--max);margin:0 auto;padding:0 24px;display:flex;align-items:center;height:64px;gap:24px}
+    .logo{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:800;color:var(--blue);text-decoration:none;white-space:nowrap}
+    .logo-mark{width:36px;height:36px;background:var(--blue);color:#FFF;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;clip-path:polygon(50% 0%,100% 100%,0% 100%)}
+    .logo-sub{font-size:10px;color:var(--t3);font-weight:400;letter-spacing:.04em}
+
+    .search-bar{flex:1;max-width:480px;display:flex;position:relative}
+    .search-bar input{flex:1;height:40px;padding:0 44px 0 16px;border:2px solid var(--bd);border-radius:99px;font-family:var(--ff);font-size:13px;outline:none;transition:border .15s;background:var(--bg)}
+    .search-bar input:focus{border-color:var(--blue)}
+    .search-bar button{position:absolute;right:4px;top:4px;width:32px;height:32px;border-radius:50%;border:none;background:var(--blue);color:#FFF;cursor:pointer;display:flex;align-items:center;justify-content:center}
+
+    .header-actions{display:flex;gap:8px;align-items:center}
+    .h-btn{height:40px;padding:0 14px;border-radius:99px;border:none;font-family:var(--ff);font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .15s}
+    .h-btn-outline{background:transparent;color:var(--t1);border:1.5px solid var(--bd2)}
+    .h-btn-outline:hover{background:var(--bg)}
+    .h-btn-solid{background:var(--blue);color:#FFF;border:none}
+    .h-btn-solid:hover{background:var(--blue-l)}
+    .cart-count{background:var(--magenta);color:#FFF;font-size:10px;font-weight:700;padding:1px 6px;border-radius:99px;min-width:18px;text-align:center}
+
+    /* ── Nav ── */
+    .nav{background:var(--white);border-bottom:1px solid var(--bd)}
+    .nav-inner{max-width:var(--max);margin:0 auto;padding:0 24px;display:flex;gap:0;overflow-x:auto}
+    .nav a{padding:12px 18px;font-size:13px;font-weight:500;color:var(--t2);text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;transition:all .15s}
+    .nav a:hover,.nav a.active{color:var(--blue);border-bottom-color:var(--blue)}
+
+    /* ── Hero ── */
+    .hero{background:linear-gradient(160deg,var(--blue-d) 0%,var(--blue) 30%,var(--blue-l) 60%,#003D73 100%);color:#FFF;padding:64px 24px;position:relative;overflow:hidden}
+    .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 75% 50%,rgba(192,30,110,.25) 0%,transparent 60%),radial-gradient(ellipse at 25% 80%,rgba(0,168,107,.15) 0%,transparent 50%);pointer-events:none}
+    .hero-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;position:relative;z-index:1}
+    .hero h1{font-size:clamp(32px,5vw,48px);font-weight:800;line-height:1.1;margin-bottom:16px;letter-spacing:-.01em}
+    .hero h1 span{background:linear-gradient(135deg,#FFF,rgba(255,255,255,.7));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero p{font-size:16px;color:rgba(255,255,255,.75);line-height:1.6;margin-bottom:28px;max-width:480px}
+    .hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:99px;font-family:var(--ff);font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all .15s;text-decoration:none}
+    .btn-white{background:#FFF;color:var(--blue)}
+    .btn-white:hover{background:rgba(255,255,255,.9)}
+    .btn-outline{background:transparent;color:#FFF;border:1.5px solid rgba(255,255,255,.35)}
+    .btn-outline:hover{background:rgba(255,255,255,.1)}
+
+    .hero-stats{display:flex;gap:32px;margin-top:32px}
+    .hero-stat{text-align:center}
+    .hero-stat .num{font-size:28px;font-weight:800;color:#FFF}
+    .hero-stat .lbl{font-size:11px;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.06em}
+
+    /* ── Category grid ── */
+    .section{max-width:var(--max);margin:0 auto;padding:56px 24px}
+    .section-head{text-align:center;margin-bottom:40px}
+    .section-head h2{font-size:28px;font-weight:700;margin-bottom:8px}
+    .section-head p{color:var(--t3);font-size:14px}
+    .cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px}
+    .cat-card{
+      background:var(--card);border:1px solid var(--bd);border-radius:var(--r-lg);
+      padding:24px 20px;text-align:center;cursor:pointer;transition:all .2s;text-decoration:none;color:inherit;display:block;
+    }
+    .cat-card:hover{box-shadow:var(--sh-lg);border-color:var(--blue);transform:translateY(-2px)}
+    .cat-icon{width:48px;height:48px;border-radius:var(--r);background:linear-gradient(135deg,var(--blue),var(--blue-l));display:flex;align-items:center;justify-content:center;margin:0 auto 14px;color:#FFF;font-size:22px}
+    .cat-card:nth-child(2n) .cat-icon{background:linear-gradient(135deg,var(--blue-l),var(--magenta))}
+    .cat-card:nth-child(3n) .cat-icon{background:linear-gradient(135deg,var(--green),var(--blue))}
+    .cat-card:nth-child(4n) .cat-icon{background:linear-gradient(135deg,var(--magenta),var(--blue-l))}
+    .cat-name{font-size:14px;font-weight:600;margin-bottom:4px}
+    .cat-count{font-size:11px;color:var(--t3)}
+
+    /* ── Products ── */
+    .prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
+    .prod-card{
+      background:var(--card);border:1px solid var(--bd);border-radius:var(--r-lg);
+      overflow:hidden;transition:all .2s;display:flex;flex-direction:column;
+    }
+    .prod-card:hover{box-shadow:var(--sh-lg);border-color:var(--bd2)}
+    .prod-img{height:160px;background:linear-gradient(135deg,#EDF2F7,#E2E8F0);display:flex;align-items:center;justify-content:center;position:relative}
+    .prod-img i{font-size:48px;color:var(--t4)}
+    .prod-badge{position:absolute;top:12px;left:12px;padding:4px 10px;border-radius:99px;font-size:10px;font-weight:600;text-transform:uppercase}
+    .badge-new{background:var(--blue);color:#FFF}
+    .badge-hot{background:var(--magenta);color:#FFF}
+    .prod-body{padding:16px;flex:1;display:flex;flex-direction:column}
+    .prod-sku{font-family:var(--fm);font-size:10px;color:var(--t4);margin-bottom:4px}
+    .prod-title{font-size:14px;font-weight:600;margin-bottom:6px;line-height:1.3}
+    .prod-desc{font-size:12px;color:var(--t3);margin-bottom:12px;line-height:1.4}
+    .prod-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+    .prod-tag{padding:2px 8px;border-radius:99px;background:var(--bg);font-size:10px;color:var(--t3)}
+    .prod-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:12px;border-top:1px solid var(--bd)}
+    .prod-price{font-size:18px;font-weight:700;color:var(--t1)}
+    .prod-price small{font-size:11px;color:var(--t3);font-weight:400}
+    .prod-stock{display:flex;align-items:center;gap:4px;font-size:11px}
+    .stock-in{color:var(--su)}
+    .stock-low{color:var(--wa)}
+    .btn-sm{padding:7px 16px;border-radius:99px;font-family:var(--ff);font-size:12px;font-weight:600;cursor:pointer;border:none;transition:all .15s}
+    .btn-add{background:var(--blue);color:#FFF}
+    .btn-add:hover{background:var(--blue-l)}
+    .btn-add.added{background:var(--su)}
+
+    /* ── Solutions banner ── */
+    .banner{background:var(--grad);color:#FFF;padding:48px 24px;text-align:center;position:relative;overflow:hidden}
+    .banner::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50%,rgba(255,255,255,.1) 0%,transparent 70%);pointer-events:none}
+    .banner-inner{max-width:var(--max);margin:0 auto;position:relative;z-index:1}
+    .banner h2{font-size:28px;font-weight:700;margin-bottom:8px}
+    .banner p{color:rgba(255,255,255,.8);margin-bottom:24px}
+    .banner .btn-white{display:inline-flex}
+
+    /* ── Industries ── */
+    .ind-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+    @media(max-width:768px){.ind-grid{grid-template-columns:repeat(2,1fr)}}
+    .ind-card{
+      background:var(--card);border:1px solid var(--bd);border-radius:var(--r-lg);padding:24px;
+      text-align:center;cursor:pointer;transition:all .2s;
+    }
+    .ind-card:hover{box-shadow:var(--sh-lg)}
+    .ind-card i{font-size:28px;color:var(--blue);margin-bottom:12px}
+    .ind-card h4{font-size:14px;font-weight:600;margin-bottom:4px}
+    .ind-card p{font-size:11px;color:var(--t3)}
+
+    /* ── Footer ── */
+    .footer{background:var(--blue-d);color:rgba(255,255,255,.7);padding:56px 24px 32px}
+    .footer-grid{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:2fr repeat(4,1fr);gap:40px;margin-bottom:40px}
+    @media(max-width:768px){.footer-grid{grid-template-columns:repeat(2,1fr)}}
+    .footer h5{color:#FFF;font-size:13px;font-weight:600;margin-bottom:14px}
+    .footer a{display:block;color:rgba(255,255,255,.6);font-size:12px;text-decoration:none;margin-bottom:8px;transition:color .15s}
+    .footer a:hover{color:#FFF}
+    .footer-brand p{font-size:12px;line-height:1.6;margin:12px 0}
+    .footer-bottom{max-width:var(--max);margin:0 auto;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.4);flex-wrap:wrap;gap:12px}
+
+    /* ── Cart sidebar ── */
+    .cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:200;opacity:0;pointer-events:none;transition:opacity .3s}
+    .cart-overlay.open{opacity:1;pointer-events:auto}
+    .cart-panel{
+      position:fixed;top:0;right:0;bottom:0;width:400px;max-width:90vw;background:var(--white);z-index:201;
+      box-shadow:-10px 0 40px rgba(0,0,0,.1);display:flex;flex-direction:column;
+      transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);
+    }
+    .cart-panel.open{transform:translateX(0)}
+    .cart-head{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--bd)}
+    .cart-head h3{font-size:18px;font-weight:700}
+    .cart-close{width:36px;height:36px;border-radius:50%;border:none;background:var(--bg);cursor:pointer;display:flex;align-items:center;justify-content:center}
+    .cart-items{flex:1;overflow-y:auto;padding:16px 24px}
+    .cart-item{display:flex;gap:12px;padding:16px 0;border-bottom:1px solid var(--bd);align-items:flex-start}
+    .cart-item-img{width:56px;height:56px;border-radius:var(--r);background:var(--bg);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .cart-item-info{flex:1}
+    .cart-item-name{font-size:13px;font-weight:600;margin-bottom:4px}
+    .cart-item-sku{font-family:var(--fm);font-size:10px;color:var(--t4)}
+    .cart-item-qty{display:flex;align-items:center;gap:8px;margin-top:8px}
+    .qty-btn{width:24px;height:24px;border-radius:50%;border:1px solid var(--bd2);background:var(--white);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px}
+    .cart-item-price{font-size:16px;font-weight:700;white-space:nowrap;margin-top:4px}
+    .cart-foot{padding:20px 24px;border-top:1px solid var(--bd)}
+    .cart-total{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;font-size:16px;font-weight:700}
+    .cart-total .num{font-size:24px;color:var(--blue)}
+    .btn-checkout{width:100%;padding:14px;border-radius:99px;border:none;background:var(--grad);color:#FFF;font-family:var(--ff);font-size:14px;font-weight:600;cursor:pointer}
+    .cart-empty{text-align:center;padding:48px 24px;color:var(--t3)}
+    .cart-empty i{font-size:48px;margin-bottom:12px;display:block}
+
+    /* ── Toast ── */
+    .toast{
+      position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);
+      background:var(--t1);color:#FFF;padding:12px 24px;border-radius:99px;
+      font-size:13px;font-weight:500;z-index:300;
+      transition:transform .3s cubic-bezier(.4,0,.2,1);pointer-events:none;
+    }
+    .toast.show{transform:translateX(-50%) translateY(0)}
+  </style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="topbar">
+  In Everything, Better — 新注册用户首单享 9 折优惠 · 使用代码 <a>TDK2026</a>
+</div>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-inner">
+    <a class="logo" href="#">
+      <div class="logo-mark">TDK</div>
+      <div>
+        <div>Electronics</div>
+        <div class="logo-sub">IN EVERYTHING, BETTER</div>
+      </div>
+    </a>
+    <div class="search-bar">
+      <input type="text" placeholder="搜索型号、品类或应用...">
+      <button><i class="icon icon-search" style="font-size:14px"></i></button>
+    </div>
+    <div class="header-actions">
+      <button class="h-btn h-btn-outline"><i class="icon icon-user" style="font-size:16px"></i> 登录</button>
+      <button class="h-btn h-btn-outline" onclick="openCart()">
+        <i class="icon icon-shopping-cart" style="font-size:16px"></i> 购物车
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="active" href="#">全部产品</a>
+    <a href="#">电容器</a>
+    <a href="#">电感器</a>
+    <a href="#">EMC 元件</a>
+    <a href="#">传感器</a>
+    <a href="#">电源</a>
+    <a href="#">RF 元件</a>
+    <a href="#">变压器</a>
+    <a href="#">解决方案</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <h1>从<span>元器件</span><br>到<span>解决方案</span></h1>
+      <p>TDK Electronics 提供超过 100,000 种电子元器件，覆盖汽车、工业、消费电子、信息通信和医疗五大领域。即日下单，全球配送。</p>
+      <div class="hero-btns">
+        <a class="btn btn-white" href="#products">浏览产品</a>
+        <a class="btn btn-outline" href="#">索取样品</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="num">100K+</div><div class="lbl">产品型号</div></div>
+        <div class="hero-stat"><div class="num">48h</div><div class="lbl">快速发货</div></div>
+        <div class="hero-stat"><div class="num">ISO 9001</div><div class="lbl">质量认证</div></div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:center;align-items:center">
+      <div style="width:280px;height:280px;background:rgba(255,255,255,.06);border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(10px)">
+        <i class="icon icon-cpu" style="font-size:80px;color:rgba(255,255,255,.3)"></i>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Categories -->
+<section class="section" id="categories">
+  <div class="section-head">
+    <h2>产品分类</h2>
+    <p>从基础元件到系统级解决方案，一站式采购</p>
+  </div>
+  <div class="cat-grid">
+    <a class="cat-card" href="#"><div class="cat-icon"><i class="icon icon-disc"></i></div><div class="cat-name">电容器</div><div class="cat-count">28,400+ 型号</div></a>
+    <a class="cat-card" href="#"><div class="cat-icon"><i class="icon icon-coins"></i></div><div class="cat-name">电感器 (线圈)</div><div class="cat-count">19,200+ 型号</div></a>
+    <a class="cat-card" href="#"><div class="cat-icon"><i class="icon icon-shield"></i></div><div class="cat-name">EMC 元件</div><div class="cat-count">12,800+ 型号</div></a>
+    <a class="cat-card" href="#"><div class="cat-icon"><i class="icon icon-radio"></i></div><div class="cat-name">RF 射频元件</div><div class="cat-count">8,500+ 型号</div></a>
+    <a class="cat-card" href="#"><div class="cat-icon"><i class="icon icon-thermometer"></i></div><div class="cat-name">保护器件</div><div class="cat-count">15,100+ 型号</div></a>
+    <a class="cat-card" href="#"><div class="cat-icon"><i class="icon icon-activity"></i></div><div class="cat-name">传感器</div><div class="cat-count">6,300+ 型号</div></a>
+    <a class="cat-card" href="#"><div class="cat-icon"><i class="icon icon-zap"></i></div><div class="cat-name">电源和转换器</div><div class="cat-count">4,900+ 型号</div></a>
+    <a class="cat-card" href="#"><div class="cat-icon"><i class="icon icon-magnet"></i></div><div class="cat-name">铁氧体和磁芯</div><div class="cat-count">11,200+ 型号</div></a>
+  </div>
+</section>
+
+<!-- Featured products -->
+<section class="section" id="products" style="padding-top:0">
+  <div class="section-head">
+    <h2>热门产品</h2>
+    <p>工程师最常采购的元器件</p>
+  </div>
+  <div class="prod-grid">
+    <!-- Product 1 -->
+    <div class="prod-card">
+      <div class="prod-img">
+        <i class="icon icon-cpu"></i>
+        <span class="prod-badge badge-new">新品</span>
+      </div>
+      <div class="prod-body">
+        <div class="prod-sku">B82722V6</div>
+        <div class="prod-title">高压环形双扼流圈</div>
+        <div class="prod-desc">额定电压 1250V DC，紧凑型设计，适用于车载充电器和工业电源</div>
+        <div class="prod-tags"><span class="prod-tag">汽车级</span><span class="prod-tag">AEC-Q200</span></div>
+        <div class="prod-footer">
+          <div class="prod-price">¥38.50 <small>/ 件</small></div>
+          <div class="prod-stock stock-in"><i class="icon icon-circle" style="font-size:6px;fill:var(--su)"></i> 现货</div>
+        </div>
+        <button class="btn-sm btn-add" style="width:100%;margin-top:10px" onclick="addToCart('B82722V6','高压环形双扼流圈',38.50,this)">加入购物车</button>
+      </div>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="prod-card">
+      <div class="prod-img">
+        <i class="icon icon-radio"></i>
+        <span class="prod-badge badge-hot">热卖</span>
+      </div>
+      <div class="prod-body">
+        <div class="prod-sku">MAF0603GW</div>
+        <div class="prod-title">超小型噪声抑制滤波器</div>
+        <div class="prod-desc">0603 封装，适用于智能手机和可穿戴设备的 EMI 噪声抑制</div>
+        <div class="prod-tags"><span class="prod-tag">消费电子</span><span class="prod-tag">SMD</span></div>
+        <div class="prod-footer">
+          <div class="prod-price">¥2.80 <small>/ 件</small></div>
+          <div class="prod-stock stock-in"><i class="icon icon-circle" style="font-size:6px;fill:var(--su)"></i> 现货</div>
+        </div>
+        <button class="btn-sm btn-add" style="width:100%;margin-top:10px" onclick="addToCart('MAF0603GW','超小型噪声抑制滤波器',2.80,this)">加入购物车</button>
+      </div>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="prod-card">
+      <div class="prod-img">
+        <i class="icon icon-battery-charging"></i>
+        <span class="prod-badge badge-new">新品</span>
+      </div>
+      <div class="prod-body">
+        <div class="prod-sku">B43655</div>
+        <div class="prod-title">铝电解电容器</div>
+        <div class="prod-desc">EV 车载充电器 DC-Link 专用，高纹波电流，长寿命 105°C 5000h</div>
+        <div class="prod-tags"><span class="prod-tag">汽车级</span><span class="prod-tag">DC-Link</span></div>
+        <div class="prod-footer">
+          <div class="prod-price">¥126.00 <small>/ 件</small></div>
+          <div class="prod-stock stock-in"><i class="icon icon-circle" style="font-size:6px;fill:var(--su)"></i> 现货</div>
+        </div>
+        <button class="btn-sm btn-add" style="width:100%;margin-top:10px" onclick="addToCart('B43655','铝电解电容器',126.00,this)">加入购物车</button>
+      </div>
+    </div>
+
+    <!-- Product 4 -->
+    <div class="prod-card">
+      <div class="prod-img">
+        <i class="icon icon-zap"></i>
+      </div>
+      <div class="prod-body">
+        <div class="prod-sku">FS1525 µPOL</div>
+        <div class="prod-title">25A 负载点 DC/DC 转换器</div>
+        <div class="prod-desc">AI 服务器和数据中心专用，高效率 µPOL 电源模块</div>
+        <div class="prod-tags"><span class="prod-tag">数据中心</span><span class="prod-tag">AI</span></div>
+        <div class="prod-footer">
+          <div class="prod-price">¥298.00 <small>/ 件</small></div>
+          <div class="prod-stock stock-low"><i class="icon icon-circle" style="font-size:6px;fill:var(--wa)"></i> 少量库存</div>
+        </div>
+        <button class="btn-sm btn-add" style="width:100%;margin-top:10px" onclick="addToCart('FS1525 µPOL','25A DC/DC转换器',298.00,this)">加入购物车</button>
+      </div>
+    </div>
+
+    <!-- Product 5 -->
+    <div class="prod-card">
+      <div class="prod-img">
+        <i class="icon icon-shield"></i>
+      </div>
+      <div class="prod-body">
+        <div class="prod-sku">B72240M MT40</div>
+        <div class="prod-title">ThermoFuse 压敏电阻</div>
+        <div class="prod-desc">浪涌保护高达 50kA，内置热熔断器，工业级可靠性</div>
+        <div class="prod-tags"><span class="prod-tag">工业</span><span class="prod-tag">浪涌保护</span></div>
+        <div class="prod-footer">
+          <div class="prod-price">¥64.00 <small>/ 件</small></div>
+          <div class="prod-stock stock-in"><i class="icon icon-circle" style="font-size:6px;fill:var(--su)"></i> 现货</div>
+        </div>
+        <button class="btn-sm btn-add" style="width:100%;margin-top:10px" onclick="addToCart('B72240M MT40','ThermoFuse 压敏电阻',64.00,this)">加入购物车</button>
+      </div>
+    </div>
+
+    <!-- Product 6 -->
+    <div class="prod-card">
+      <div class="prod-img">
+        <i class="icon icon-wind"></i>
+        <span class="prod-badge badge-hot">热卖</span>
+      </div>
+      <div class="prod-body">
+        <div class="prod-sku">NTCSP Series</div>
+        <div class="prod-title">汽车级 NTC 热敏电阻</div>
+        <div class="prod-desc">+175°C 耐温，导电胶安装，适用于 EV 电池管理系统</div>
+        <div class="prod-tags"><span class="prod-tag">汽车级</span><span class="prod-tag">BMS</span></div>
+        <div class="prod-footer">
+          <div class="prod-price">¥12.80 <small>/ 件</small></div>
+          <div class="prod-stock stock-in"><i class="icon icon-circle" style="font-size:6px;fill:var(--su)"></i> 现货</div>
+        </div>
+        <button class="btn-sm btn-add" style="width:100%;margin-top:10px" onclick="addToCart('NTCSP Series','汽车级NTC热敏电阻',12.80,this)">加入购物车</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Solutions banner -->
+<section class="banner">
+  <div class="banner-inner">
+    <h2>不止元器件，更是解决方案</h2>
+    <p>汽车 · 工业 · ICT · 医疗 · 消费电子 — 五大行业深度技术支持和参考设计</p>
+    <a class="btn btn-white" href="#">探索行业方案</a>
+  </div>
+</section>
+
+<!-- Industries -->
+<section class="section">
+  <div class="section-head">
+    <h2>应用领域</h2>
+    <p>针对不同行业的定制化元器件组合和技术支持</p>
+  </div>
+  <div class="ind-grid">
+    <div class="ind-card"><i class="icon icon-car"></i><h4>汽车电子</h4><p>EV/HEV · ADAS · 车载充电</p></div>
+    <div class="ind-card"><i class="icon icon-factory"></i><h4>工业与能源</h4><p>变频器 · 储能 · 机器人</p></div>
+    <div class="ind-card"><i class="icon icon-smartphone"></i><h4>消费电子</h4><p>手机 · 可穿戴 · 智能家居</p></div>
+    <div class="ind-card"><i class="icon icon-server"></i><h4>信息通信</h4><p>5G · 数据中心 · AI 服务器</p></div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+        <div class="logo-mark">TDK</div>
+        <span style="color:#FFF;font-weight:700;font-size:16px">Electronics</span>
+      </div>
+      <p>TDK Electronics 是 TDK 集团旗下的电子元器件事业部，提供电容器、电感器、EMC 元件、传感器、电源等全品类产品。</p>
+    </div>
+    <div><h5>产品</h5><a>电容器</a><a>电感器</a><a>EMC元件</a><a>传感器</a><a>电源</a></div>
+    <div><h5>支持</h5><a>技术文档</a><a>样品申请</a><a>交期查询</a><a>FAQ</a><a>联系我们</a></div>
+    <div><h5>公司</h5><a>关于TDK</a><a>新闻中心</a><a>招贤纳士</a><a>质量体系</a><a>可持续发展</a></div>
+    <div><h5>法律</h5><a>隐私政策</a><a>使用条款</a><a>出口管制</a><a>Cookie 设置</a></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 TDK Electronics AG. All rights reserved.</span>
+    <span>In Everything, Better</span>
+  </div>
+</footer>
+
+<!-- Cart overlay -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-head">
+    <h3>购物车 (<span id="cartPanelCount">0</span>)</h3>
+    <button class="cart-close" onclick="closeCart()"><i class="icon icon-x" style="font-size:18px"></i></button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty">
+      <i class="icon icon-shopping-cart"></i>
+      <div style="font-size:14px;font-weight:600;margin-bottom:4px">购物车为空</div>
+      <div style="font-size:12px">浏览产品并添加到购物车</div>
+    </div>
+  </div>
+  <div class="cart-foot">
+    <div class="cart-total"><span>合计</span><span class="num">¥<span id="cartTotal">0.00</span></span></div>
+    <button class="btn-checkout">结算</button>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+  let cart = [];
+
+  function addToCart(sku, name, price, btn) {
+    const existing = cart.find(i => i.sku === sku);
+    if (existing) { existing.qty++; }
+    else { cart.push({ sku, name, price, qty: 1 }); }
+    updateCart();
+    // Button feedback
+    btn.textContent = '已添加 ✓';
+    btn.classList.add('added');
+    setTimeout(() => { btn.textContent = '加入购物车'; btn.classList.remove('added'); }, 1500);
+    // Toast
+    showToast(`已添加：${name}`);
+  }
+
+  function removeFromCart(sku) {
+    cart = cart.filter(i => i.sku !== sku);
+    updateCart();
+  }
+
+  function changeQty(sku, delta) {
+    const item = cart.find(i => i.sku === sku);
+    if (!item) return;
+    item.qty += delta;
+    if (item.qty <= 0) { removeFromCart(sku); return; }
+    updateCart();
+  }
+
+  function updateCart() {
+    const count = cart.reduce((s,i) => s + i.qty, 0);
+    const total = cart.reduce((s,i) => s + i.price * i.qty, 0);
+    document.getElementById('cartCount').textContent = count;
+    document.getElementById('cartPanelCount').textContent = count;
+    document.getElementById('cartTotal').textContent = total.toFixed(2);
+
+    const container = document.getElementById('cartItems');
+    if (cart.length === 0) {
+      container.innerHTML = '<div class="cart-empty"><i class="icon icon-shopping-cart"></i><div style="font-size:14px;font-weight:600;margin-bottom:4px">购物车为空</div><div style="font-size:12px">浏览产品并添加到购物车</div></div>';
+    } else {
+      container.innerHTML = cart.map(i => `
+        <div class="cart-item">
+          <div class="cart-item-img"><i class="icon icon-box" style="font-size:24px;color:var(--t4)"></i></div>
+          <div class="cart-item-info">
+            <div class="cart-item-name">${i.name}</div>
+            <div class="cart-item-sku">${i.sku}</div>
+            <div class="cart-item-qty">
+              <button class="qty-btn" onclick="changeQty('${i.sku}',-1)">−</button>
+              <span style="font-size:13px;font-weight:500">${i.qty}</span>
+              <button class="qty-btn" onclick="changeQty('${i.sku}',1)">+</button>
+            </div>
+          </div>
+          <div class="cart-item-price">¥${(i.price * i.qty).toFixed(2)}</div>
+        </div>
+      `).join('');
+    }
+  }
+
+  function openCart() {
+    document.getElementById('cartOverlay').classList.add('open');
+    document.getElementById('cartPanel').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeCart() {
+    document.getElementById('cartOverlay').classList.remove('open');
+    document.getElementById('cartPanel').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._timeout);
+    t._timeout = setTimeout(() => t.classList.remove('show'), 2000);
+  }
+</script>
+</body>
+</html>
